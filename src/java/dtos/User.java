@@ -18,6 +18,13 @@ public class User {
         this.profile = profile;
     }
 
+    public User(long id, String username, String password, String firstname, String lastname, String email, String profile) {
+        this(id, username, password, profile);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -70,8 +77,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public String getFullName(){
+
+    public String getFullName() {
         return firstname + " " + lastname;
     }
 
@@ -82,7 +89,7 @@ public class User {
     public void setProfile(String profile) {
         this.profile = profile;
     }
-    
+
     @Override
     public String toString() {
         return "Usuario {id:" + id
