@@ -1,7 +1,6 @@
 package daos;
 
 import connection.ConnectionDB;
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

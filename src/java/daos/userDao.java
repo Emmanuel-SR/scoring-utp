@@ -64,4 +64,9 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
         return false;
     }
 
+    @Override
+    public boolean exists(User resource) {
+        return false;
+    }
+
 }

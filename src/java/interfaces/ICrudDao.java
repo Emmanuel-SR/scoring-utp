@@ -13,4 +13,6 @@ public interface ICrudDao<T, ID extends Serializable> {
     Iterable<T> all();
 
     boolean delete(T resourse);
+    
+    boolean exists(T resource);
 }
