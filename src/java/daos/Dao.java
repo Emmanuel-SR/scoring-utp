@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class Dao<T, ID extends Serializable> {
+public abstract class Dao {
 
     protected static PreparedStatement ps = null;
 
@@ -16,7 +16,7 @@ public abstract class Dao<T, ID extends Serializable> {
 
     public Dao() {
     }
-
+   
     protected void closeConnection() {
         try {
             if (res != null) {
