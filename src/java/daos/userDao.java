@@ -1,6 +1,5 @@
 package daos;
 
-import base.Dao;
 import dtos.User;
 import exceptions.IncorrectDaoOperation;
 import java.sql.SQLException;

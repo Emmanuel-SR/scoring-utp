@@ -15,7 +15,7 @@ public class ConnectionDB {
     private static final String URL = "jdbc:mysql://localhost:3306/rate_utp_db";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String USER = "root";
-    private static final String PASS = "root1234";
+    private static final String PASS = "";
 
     private ConnectionDB() {
         try {

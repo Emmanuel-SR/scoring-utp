@@ -1,4 +1,4 @@
-package base;
+package daos;
 
 import connection.ConnectionDB;
 import java.io.Serializable;
