@@ -41,7 +41,7 @@
                         <input type="hidden" name="professor_id" value="<%=professor.getId()%>">
                         <div class="rating-group">
                             <label class="input-label" for="courses">Curso:</label>
-                            <input type="text" class="input-form" id="course" name="course" placeholder="Enter course here.">
+                            <input type="text" class="input-form" id="course" name="course" placeholder="Enter course here." required="">
                         </div>
                         <div class="rating-group">
                             <label class="input-label">Claridad:</label>

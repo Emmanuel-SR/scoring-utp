@@ -32,7 +32,7 @@ public class ProfessorTest {
 
     private static void findAllScoringDetailsByText() {
         Map<String, String> errors = new HashMap<>();
-        List<ProfessorScoringDetail> details = SERVICE.findAllScoringDetailsByText("janet", 10, errors);
+        List<ProfessorScoringDetail> details = SERVICE.findAllScoringDetailsByText("", 10, errors);
         Assert.notNull(details, errors.get("error"));
     }
 

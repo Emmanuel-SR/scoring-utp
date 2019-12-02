@@ -64,7 +64,7 @@ public class AccountController extends HttpServlet {
                 usr.setAnswer(answer);
 
                 if (userService.create(usr, result) != null) {
-                    request.getSession().setAttribute("success", "Account information updated.");
+                    request.getSession().setAttribute("success", "Account created successfully.");
                     request.getSession().setAttribute("USER", usr);
                 } else {
                     request.getSession().setAttribute("warning", result.get("warning"));
@@ -86,6 +86,7 @@ public class AccountController extends HttpServlet {
 
                 if (userService.update(usr, result) != null) {
                     request.getSession().setAttribute("success", "Account information updated.");
+                    usr.setPassword(userSession.getPassword());
                     request.getSession().setAttribute("USER", usr);
                 } else {
                     request.getSession().setAttribute("warning", result.get("warning"));
@@ -99,23 +100,37 @@ public class AccountController extends HttpServlet {
             case "reset-password":
                 String newPassword = request.getParameter("new_password");
                 String confirmPassword = request.getParameter("confirm_password");
+                String currentPassword = request.getParameter("current_password");
 
                 userSession = (User) request.getSession().getAttribute("USER");
 
-                String hashedPassword = util.Hash.hashSHA256(request.getParameter("current_password"));
+                String hashedPassword = util.Hash.hashSHA256(currentPassword);
 
                 if (!userSession.getPassword().equals(hashedPassword)) {
                     request.getSession().setAttribute("warning", "Current password incorrect.");
-                } else if (newPassword.equals(confirmPassword)) {
+                    response.sendRedirect(request.getContextPath().concat("/student/password"));
+                    break;
+                }
+                if (!newPassword.equals(confirmPassword)) {
+                    request.getSession().setAttribute("warning", "Passwords are different.");
+                    response.sendRedirect(request.getContextPath().concat("/student/password"));
+                    break;
+                }
 
-                    userSession.setPassword(newPassword);
-
-                    if (userService.changePassword(userSession, result) != null) {
-                        request.getSession().setAttribute("success", "Password changed.");
-                    } else {
-                        request.getSession().setAttribute("warning", result.get("warning"));
-                        request.getSession().setAttribute("error", result.get("error"));
-                    }
+                if (currentPassword.equals(newPassword)) {
+                    request.getSession().setAttribute("warning", "New password must be different.");
+                    response.sendRedirect(request.getContextPath().concat("/student/password"));
+                    break;
+                }
+                
+                userSession.setPassword(newPassword);
+                if (userService.changePassword(userSession, result) != null) {
+                    userSession.setPassword(util.Hash.hashSHA256(newPassword));
+                    request.getSession().setAttribute("USER", userSession);
+                    request.getSession().setAttribute("success", "Password changed.");
+                } else {
+                    request.getSession().setAttribute("warning", result.get("warning"));
+                    request.getSession().setAttribute("error", result.get("error"));
                 }
                 response.sendRedirect(request.getContextPath().concat("/student/password"));
                 break;
