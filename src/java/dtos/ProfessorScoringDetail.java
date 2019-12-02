@@ -12,16 +12,16 @@ public class ProfessorScoringDetail {
     private double clarityAverage;
     private double helpAverage;
     private double facilityAverage;
-    private double TotalAverage;
+    private double totalAverage;
 
-    public ProfessorScoringDetail(long professorId, String professorFullName, int scorings, double clarityAverage, double helpAverage, double facilityAverage) {
+    public ProfessorScoringDetail(long professorId, String professorFullName, int scorings, double clarityAverage, double helpAverage, double facilityAverage, double totalAverage ) {
         this.professorId = professorId;
         this.professorFullName = professorFullName;
         this.scorings = scorings;
         this.clarityAverage = clarityAverage;
         this.helpAverage = helpAverage;
         this.facilityAverage = facilityAverage;
-        this.TotalAverage = (clarityAverage + facilityAverage + helpAverage) / 3;
+        this.totalAverage = totalAverage;
     }
 
     public long getProfessorId() {
@@ -73,11 +73,11 @@ public class ProfessorScoringDetail {
     }
 
     public double getTotalAverage() {
-        return TotalAverage;
+        return totalAverage;
     }
 
-    public void setTotalAverage(double TotalAverage) {
-        this.TotalAverage = TotalAverage;
+    public void setTotalAverage(double totalAverage) {
+        this.totalAverage = totalAverage;
     }
 
 }

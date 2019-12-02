@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.AuthService;
 import services.SecurityQuestionService;
 import services.UserService;
 
@@ -17,6 +18,7 @@ import services.UserService;
 public class AccountController extends HttpServlet {
 
     private final UserService userService = new UserService();
+    private final AuthService authService = new AuthService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,6 +50,8 @@ public class AccountController extends HttpServlet {
         String answer;
         long securityQuestionId;
 
+        User userSession = null;
+
         switch (action) {
             case "register":
                 username = request.getParameter("username");
@@ -65,17 +69,16 @@ public class AccountController extends HttpServlet {
 
                 if (userService.create(usr, result) != null) {
                     request.getSession().setAttribute("success", "Account created successfully.");
-                    request.getSession().setAttribute("USER", usr);
+                    request.getRequestDispatcher(request.getContextPath().concat("/auth/sign-in")).forward(request, response);
+                    break;
                 } else {
                     request.getSession().setAttribute("warning", result.get("warning"));
                     request.getSession().setAttribute("error", result.get("error"));
                     response.sendRedirect(request.getContextPath().concat("/register-student.jsp"));
                     break;
                 }
-                response.sendRedirect(request.getContextPath().concat("/sign-in.jsp"));
-                break;
             case "update":
-                User userSession = (User) request.getSession().getAttribute("USER");
+                userSession = (User) request.getSession().getAttribute("USER");
 
                 username = request.getParameter("username");
                 firstname = request.getParameter("firstname");
@@ -122,7 +125,7 @@ public class AccountController extends HttpServlet {
                     response.sendRedirect(request.getContextPath().concat("/student/password"));
                     break;
                 }
-                
+
                 userSession.setPassword(newPassword);
                 if (userService.changePassword(userSession, result) != null) {
                     userSession.setPassword(util.Hash.hashSHA256(newPassword));

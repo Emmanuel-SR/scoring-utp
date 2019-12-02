@@ -3,9 +3,6 @@
     var warning = "<%=session.getAttribute("warning")%>";
     var error = "<%=session.getAttribute("error")%>";
     var success = "<%=session.getAttribute("success")%>";
-    console.log(warning);
-    console.log(error);
-    console.log(success);
 
     window.addEventListener("load", function (e) {
         if (warning !== "null") {
