@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `rate_utp_db` charset = utf8;
+CREATE DATABASE IF NOT EXISTS `scoring_utp_db` charset = utf8;
 
-USE `rate_utp_db`;
+USE `scoring_utp_db`;
 
 CREATE TABLE IF NOT EXISTS security_questions  (
   security_id INT AUTO_INCREMENT PRIMARY KEY, 
