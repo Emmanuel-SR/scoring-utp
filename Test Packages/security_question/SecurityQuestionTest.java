@@ -1,25 +1,23 @@
-package auth;
+package security_question;
 
-import dtos.User;
+import dtos.SecurityQuestion;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import services.AuthService;
+import services.SecurityQuestionService;
 import util.Assert;
 
-public class AuthTest {
+public class SecurityQuestionTest {
 
-    private static final AuthService SERVICE = new AuthService();
+    private static final SecurityQuestionService SERVICE = new SecurityQuestionService();
 
     public static void main(String[] args) {
-        authenticate();
+        findAll();
     }
 
-    private static void authenticate() {
-        Map<String, String> result = new HashMap<>();
-        String username = "1626989";
-        String password = "abc.123";
-        User usr = SERVICE.authenticate(username, password, result);
-        Assert.notNull(usr, result.get("error"));
+    private static void findAll() {
+        Map<String, String> errors = new HashMap<>();
+        List<SecurityQuestion> questions = SERVICE.findAll(errors);
+        Assert.notNull(questions, errors.get("error"));
     }
-
 }

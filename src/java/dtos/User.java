@@ -10,16 +10,16 @@ public class User {
     private String firstname;
     private String lastname;
     private String email;
-    private String profile;
+    private long securityQuestionId;
+    private String answer;
 
-    public User(long id, String username, String password, String profile) {
-        this(username, password);
+    public User(long id, String username, String password, String firstname, String lastname, String email) {
+        this(username, password, firstname, lastname, email);
         this.id = id;
-        this.profile = profile;
     }
 
-    public User(long id, String username, String password, String firstname, String lastname, String email, String profile) {
-        this(id, username, password, profile);
+    public User(String username, String password, String firstname, String lastname, String email) {
+        this(username, password);
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -28,6 +28,9 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public Long getId() {
@@ -82,20 +85,28 @@ public class User {
         return firstname + " " + lastname;
     }
 
-    public String getProfile() {
-        return profile;
+    public long getSecurityQuestionId() {
+        return securityQuestionId;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setSecurityQuestionId(long securityQuestionId) {
+        this.securityQuestionId = securityQuestionId;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+    
+    
     @Override
     public String toString() {
         return "Usuario {id:" + id
                 + ", usuario:" + username
-                + ", contrasena:" + password
-                + ", profile:" + profile + "}";
+                + ", contrasena:" + password + "}";
     }
 
     @Override

@@ -9,7 +9,7 @@ public final class Hash {
     private Hash() {
     }
 
-    public static final String hashPassword(String str) {
+    public static final String hashSHA256(String str) {
 
         MessageDigest md;
 

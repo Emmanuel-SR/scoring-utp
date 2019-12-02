@@ -21,7 +21,8 @@ public class AuthFilter implements Filter {
     private HttpServletRequest httpRequest = null;
     private HttpServletResponse httpResponse = null;
 
-    private static final Set<String> LOGIN_REQUIRED_URLS = new HashSet<>(Arrays.asList("/home/"));
+    private static final Set<String> LOGIN_REQUIRED_URLS = new HashSet<>(Arrays.asList("/home/",
+            "/account/edit", "/student/", "/student/profile", "/professor","/professor/add", "/professor/save", "professor/findByText"));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -45,14 +46,7 @@ public class AuthFilter implements Filter {
         boolean isLoginPage = httpRequest.getRequestURI().endsWith("sign-in.jsp");
 
         if (isLoggedIn && (isAuthRequest || isLoginPage)) {
-
-            String profile = (String) httpRequest.getSession().getAttribute("PROFILE_NAME");
-
-            if (profile.equals("student")) {
-                httpResponse.sendRedirect(httpRequest.getContextPath().concat("/student/"));
-            } else {
-                httpResponse.sendRedirect(httpRequest.getContextPath().concat("/professor/"));
-            }
+            httpResponse.sendRedirect(httpRequest.getContextPath().concat("/student/"));
         } else if (!isLoggedIn && isLoginRequired()) {
             httpResponse.sendRedirect(httpRequest.getContextPath().concat("/sign-in.jsp"));
         } else {

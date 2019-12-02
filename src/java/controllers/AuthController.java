@@ -30,7 +30,11 @@ public class AuthController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getPathInfo().substring(1);
+        String action = "";
+
+        if (request.getPathInfo() != null) {
+            action = request.getPathInfo().substring(1);
+        }
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -41,17 +45,12 @@ public class AuthController extends HttpServlet {
             case "sign-in":
                 User usr = authService.authenticate(username, password, result);
                 if (usr == null) {
-                    request.setAttribute("error", result.get("message"));
-                    request.getRequestDispatcher("/signin.jsp").forward(request, response);
+                    request.getSession().setAttribute("warning", result.get("warning"));
+                    request.getSession().setAttribute("error", result.get("error"));
+                    response.sendRedirect(request.getContextPath().concat("/sign-in.jsp"));
                 } else {
                     request.getSession().setAttribute("USER", usr);
-                    request.getSession().setAttribute("PROFILE_NAME", usr.getProfile());
-
-                    if (usr.getProfile().equals("student")) {
-                        response.sendRedirect(request.getContextPath().concat("/student/"));
-                    } else {
-                        response.sendRedirect(request.getContextPath().concat("/professor/"));
-                    }
+                    response.sendRedirect(request.getContextPath().concat("/student/"));
                 }
                 break;
             case "sign-out":

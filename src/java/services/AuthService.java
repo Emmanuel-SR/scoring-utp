@@ -13,12 +13,15 @@ public class AuthService {
     }
 
     public User authenticate(String username, String password, Map<String, String> response) {
+
+        String hashedPassword = util.Hash.hashSHA256(password);
+
         User usr = null;
         try {
-            usr = dao.auth(username, password);
+            usr = dao.auth(username, hashedPassword);
             if (usr != null) {
             } else {
-                response.put("message", "Invalid username or password.");
+                response.put("warning", "Invalid username or password.");
             }
         } catch (IncorrectDaoOperation e) {
             response.put("error", e.getMessage());

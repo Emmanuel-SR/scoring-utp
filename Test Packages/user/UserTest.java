@@ -15,27 +15,54 @@ public class UserTest {
         //findOne();
         //findAll();
         //update();
+        create();
+        //changePassword();
+        //delete();
     }
 
     private static void findOne() {
         Map<String, String> result = new HashMap<>();
         long id = 0;
         User user = SERVICE.findOne(id, result);
-        Assert.notNull(user, result.get("message"));
+        Assert.notNull(user, result.get("error"));
     }
 
     private static void findAll() {
         Map<String, String> errors = new HashMap<>();
         List<User> users = SERVICE.findAll(errors);
-        Assert.notEmpty(users, errors.get("message"));
+        Assert.notNull(users, errors.get("error"));
     }
-    
-      private static void update() {
+
+    private static void update() {
         Map<String, String> error = new HashMap<>();
-        User usr = new User(1,"1626989","abc.123","emmanuel","sr","1626989@utp.edu.pe","student");
+        User usr = new User(1, "1626989", "abc.123", "JOSE EMMANUEL", "SIRVAS RUEDA", "1626989@utp.edu.pe");
         User result = SERVICE.update(usr, error);
         Assert.notNull(result, error.get("error"));
     }
 
+    private static void create() {
+        Map<String, String> result = new HashMap<>();
+        User usr = new User("1624655", "abc.123", "VANDERLEI ELIEZER", "PEREZ CISNEROS", "1624655@utp.edu.pe");
+        usr.setSecurityQuestionId(3);
+        usr.setAnswer("Perez");
+        User newUser = SERVICE.create(usr, result);
+        Assert.notNull(newUser, result.get("error"));
+    }
+
+    private static void changePassword() {
+        Map<String, String> error = new HashMap<>();
+        User usr = new User();
+        usr.setId(2L);
+        usr.setPassword("abc.123");
+        User result = SERVICE.changePassword(usr, error);
+        Assert.notNull(result, error.get("error"));
+    }
+
+    private static void delete() {
+        Map<String, String> error = new HashMap<>();
+        User usr = new User();
+        usr.setId(3L);
+        SERVICE.delete(usr, error);
+    }
 
 }

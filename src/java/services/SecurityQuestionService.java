@@ -1,52 +1,39 @@
 package services;
 
-import daos.userDao;
-import dtos.User;
+import daos.SecurityQuestionDao;
+import dtos.SecurityQuestion;
 import exceptions.IncorrectDaoOperation;
 import java.util.List;
 import java.util.Map;
 
-public class UserService {
+public class SecurityQuestionService {
 
-    private final userDao dao = new userDao();
+    private final SecurityQuestionDao dao = new SecurityQuestionDao();
 
-    public UserService() {
+    public SecurityQuestionService() {
     }
 
-    public User findOne(long id, Map<String, String> result) {
-        User usr = null;
+    public SecurityQuestion findOne(long id, Map<String, String> result) {
+        SecurityQuestion question = null;
         try {
-            usr = dao.get(id);
-            if (usr == null) {
-                result.put("message", "No user found with id: " + id);
+            question = dao.get(id);
+            if (question == null) {
+                result.put("warning", "No question found with id: " + id);
             }
         } catch (IncorrectDaoOperation ex) {
             result.put("error", ex.getMessage());
         }
-        return usr;
+        return question;
     }
 
-    public List<User> findAll(Map<String, String> result) {
-        List<User> usuarios = null;
+    public List<SecurityQuestion> findAll(Map<String, String> result) {
+        List<SecurityQuestion> questions = null;
         try {
-            usuarios = dao.all();
+            questions = dao.all();
         } catch (IncorrectDaoOperation ex) {
             result.put("error", ex.getMessage());
         }
-        return usuarios;
-    }
-
-    public User update(User usr, Map<String, String> result) {
-        if (usr.getId() > 0) {
-            try {
-                if (dao.update(usr)) {
-                    return usr;
-                }
-            } catch (IncorrectDaoOperation ex) {
-                result.put("error", ex.getMessage());
-            }
-        }
-        return null;
+        return questions;
     }
 
 }

@@ -1,4 +1,24 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/RESOURCES/imgs/logo.ico" />
+<script type="text/javascript">
+
+    var warning = "<%=session.getAttribute("warning")%>";
+    var error = "<%=session.getAttribute("error")%>";
+    var success = "<%=session.getAttribute("success")%>";
+    console.log();
+
+    window.addEventListener("load", function (e) {
+        if (warning !== "null") {
+            alert(warning);
+        }
+        if (error !== "null") {
+            alert(error);
+        }
+        if (success !== "null") {
+            alert(success);
+        }
+    });
+    <%
+        session.removeAttribute("warning");
+        session.removeAttribute("error");
+        session.removeAttribute("success");
+    %>
+</script>

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "student", urlPatterns = {"/student/*"})
 public class StudentController extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,12 +24,22 @@ public class StudentController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getPathInfo().substring(1);
+        String action = "";
+
+        if (request.getPathInfo() != null) {
+            action = request.getPathInfo().substring(1);
+        }
 
         switch (action) {
             case "":
-               request.getRequestDispatcher("/WEB-INF/views/student.jsp").forward(request, response);
-                  break;
+                request.getRequestDispatcher("/WEB-INF/views/student/index.jsp").forward(request, response);
+                break;
+            case "profile":
+                request.getRequestDispatcher("/WEB-INF/views/student/profile.jsp").forward(request, response);
+                break;
+            case "password":
+                request.getRequestDispatcher("/WEB-INF/views/student/password.jsp").forward(request, response);
+                break;
             default:
                 request.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(request, response);
                 break;

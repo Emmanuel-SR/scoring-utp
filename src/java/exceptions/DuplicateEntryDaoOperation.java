@@ -1,8 +1,8 @@
 package exceptions;
 
-public class IncorrectDaoOperation extends RuntimeException {
+public class DuplicateEntryDaoOperation extends RuntimeException {
 
-    public IncorrectDaoOperation(final String message) {
+    public DuplicateEntryDaoOperation(final String message) {
         super(message);
     }
     

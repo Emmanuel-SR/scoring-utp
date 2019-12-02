@@ -7,15 +7,17 @@ import java.sql.SQLException;
 
 public abstract class Dao {
 
-    protected static PreparedStatement ps = null;
+    protected PreparedStatement ps = null;
 
-    protected static ResultSet res = null;
+    protected ResultSet res = null;
 
     protected final ConnectionDB cnn = ConnectionDB.getInstance();
 
+    public static final int MYSQL_DUPLICATE_PK = 1062;
+
     public Dao() {
     }
-   
+
     protected void closeConnection() {
         try {
             if (res != null) {
@@ -28,7 +30,7 @@ public abstract class Dao {
                 cnn.closeConnection();
             }
         } catch (SQLException e) {
-           System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
