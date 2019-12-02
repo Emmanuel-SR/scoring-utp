@@ -14,7 +14,7 @@
         if (success !== "null") {
             alert(success);
         }
-    });
+    },true);
     <%
         session.removeAttribute("warning");
         session.removeAttribute("error");
