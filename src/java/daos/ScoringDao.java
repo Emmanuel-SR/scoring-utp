@@ -42,6 +42,8 @@ public class ScoringDao extends Dao {
             } else {
                 throw new IncorrectDaoOperation(e.getMessage());
             }
+        }finally {
+            closeConnection();
         }
 
         return false;

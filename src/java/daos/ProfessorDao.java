@@ -38,6 +38,8 @@ public class ProfessorDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return professors;
     }
@@ -55,6 +57,8 @@ public class ProfessorDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return details;
     }
@@ -70,6 +74,8 @@ public class ProfessorDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return professor;
     }
@@ -92,8 +98,9 @@ public class ProfessorDao extends Dao {
             } else {
                 throw new IncorrectDaoOperation(e.getMessage());
             }
+        }finally {
+            closeConnection();
         }
-
         return false;
     }
 

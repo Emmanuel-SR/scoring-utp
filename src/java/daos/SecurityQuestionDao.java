@@ -26,6 +26,8 @@ public class SecurityQuestionDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return questions;
     }
@@ -42,6 +44,8 @@ public class SecurityQuestionDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return question;
     }
