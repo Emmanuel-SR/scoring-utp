@@ -77,6 +77,8 @@ public class ProfessorController extends HttpServlet {
 
                 if (service.create(professor, result) != null) {
                     request.getSession().setAttribute("success", professor.getFullName() + " added!");
+                    response.sendRedirect(request.getContextPath().concat("/student"));
+                    break;
                 } else {
                     request.getSession().setAttribute("warning", result.get("warning"));
                     request.getSession().setAttribute("error", result.get("error"));
