@@ -12,10 +12,10 @@ public class ConnectionDB {
 
     private static Connection cnn = null;
 
-    private static final String URL = "jdbc:mysql://node50382-scoring-utp.jl.serv.net.mx:3306/scoring_utp_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/scoring_utp_db";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String USER = "";
-    private static final String PASS = "";
+    private static final String USER = "root";
+    private static final String PASS = "root1234";
 
     private ConnectionDB() {
         try {

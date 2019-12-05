@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS scorings (
  recommend TINYINT NOT NULL,
  assistance TINYINT NOT NULL,
  `comment` TEXT NULL,
- student_score VARCHAR(255) NOT NULL,
+ student_score DOUBLE NOT NULL,
  professor_id INT NOT NULL,
  user_id INT NOT NULL,
  CHECK (clarity<=5 AND clarity >= 0),

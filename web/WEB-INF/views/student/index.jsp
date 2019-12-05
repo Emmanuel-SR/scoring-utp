@@ -81,7 +81,7 @@
                 xhttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
 
-                        var keys = ["professorFullName", "scorings", "clarityAverage", "helpAverage", "facilityAverage", "TotalAverage"];
+                        var keys = ["professorFullName", "scorings", "clarityAverage", "helpAverage", "facilityAverage", "totalAverage"];
 
                         var professors = JSON.parse(this.responseText);
 

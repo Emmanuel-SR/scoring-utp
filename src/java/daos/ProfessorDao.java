@@ -22,8 +22,8 @@ public class ProfessorDao extends Dao {
     private static final String SQL_ALL_BY_TEXT = "select * from professors where CONCAT(first_name, ' ', last_name) like ? limit ?";
     private static final String SQL_GET_BY_ID = "select * from professors where professor_id = ?";
     private static final String SQL_INSERT = "insert into professors (utp_code,first_name, last_name, faculty) values (?,?,?,?)";
-    private static final String SQL_ALL_SCORING_DETAILS_BY_TEXT = "select pr.professor_id,CONCAT(pr.first_name,' ',pr.last_name) AS professor_full_name, IF(count(sc.scoring_id) > 0, count(sc.scoring_id) , null) as scorings, avg(sc.facility) as facility_avg , avg(sc.`help`) as help_avg,\n"
-            + " avg(sc.clarity) as clarity_avg from scorings as sc right join professors as pr on sc.professor_id = pr.professor_id where CONCAT(first_name, ' ', last_name) like ? group by pr.professor_id limit ?";
+    private static final String SQL_ALL_SCORING_DETAILS_BY_TEXT = "select pr.professor_id,CONCAT(pr.first_name,' ',pr.last_name) AS professor_full_name, IF(count(sc.scoring_id) > 0, count(sc.scoring_id) , null) as scorings, ROUND(avg(sc.facility),1) as facility_avg , ROUND(avg(sc.`help`),1) as help_avg,\n"
+            + " ROUND(avg(sc.clarity),1) as clarity_avg, ROUND((avg(sc.clarity) + avg(sc.facility) + avg(sc.`help`)) / 3,1) as total_avg from scorings as sc right join professors as pr on sc.professor_id = pr.professor_id where CONCAT(first_name, ' ', last_name) like ? group by pr.professor_id limit ?";
 
     public List<Professor> allByText(String text, int limit) {
         List<Professor> professors = new ArrayList<>();
@@ -38,6 +38,8 @@ public class ProfessorDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return professors;
     }
@@ -50,13 +52,13 @@ public class ProfessorDao extends Dao {
             ps.setInt(2, limit);
             res = ps.executeQuery();
             while (res.next()) {
-                if (res.getLong("professor_id") > 0) {
-                    ProfessorScoringDetail detail = new ProfessorScoringDetail(res.getLong("professor_id"), res.getString("professor_full_name"), res.getInt("scorings"), res.getDouble("facility_avg"), res.getDouble("help_avg"), res.getDouble("clarity_avg"));
+                    ProfessorScoringDetail detail = new ProfessorScoringDetail(res.getLong("professor_id"), res.getString("professor_full_name"), res.getInt("scorings"), res.getDouble("facility_avg"), res.getDouble("help_avg"), res.getDouble("clarity_avg"),  res.getDouble("total_avg"));
                     details.add(detail);
-                }
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return details;
     }
@@ -72,6 +74,8 @@ public class ProfessorDao extends Dao {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return professor;
     }
@@ -94,8 +98,9 @@ public class ProfessorDao extends Dao {
             } else {
                 throw new IncorrectDaoOperation(e.getMessage());
             }
+        }finally {
+            closeConnection();
         }
-
         return false;
     }
 

@@ -14,7 +14,7 @@ public class Scoring {
     private boolean recommed;
     private boolean assistance;
     private String comment;
-    private String studentScore;
+    private double studentScore;
     private long professorId;
     private long userId;
 
@@ -85,11 +85,11 @@ public class Scoring {
         this.comment = comment;
     }
 
-    public String getStudentScore() {
+    public double getStudentScore() {
         return studentScore;
     }
 
-    public void setStudentScore(String studentScore) {
+    public void setStudentScore(double studentScore) {
         this.studentScore = studentScore;
     }
 
