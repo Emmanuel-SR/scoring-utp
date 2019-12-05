@@ -14,8 +14,8 @@ public class ConnectionDB {
 
     private static final String URL = "jdbc:mysql://node50382-scoring-utp.jl.serv.net.mx:3306/scoring_utp_db";
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String USER = "root";
-    private static final String PASS = "XQIqdn11133";
+    private static final String USER = "";
+    private static final String PASS = "";
 
     private ConnectionDB() {
         try {
