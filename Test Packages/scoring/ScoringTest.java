@@ -1,6 +1,5 @@
 package scoring;
 
-import dtos.Professor;
 import dtos.Scoring;
 import java.util.HashMap;
 import java.util.Map;
