@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import services.AuthService;
 import services.SecurityQuestionService;
 import services.UserService;
 
@@ -18,7 +17,6 @@ import services.UserService;
 public class AccountController extends HttpServlet {
 
     private final UserService userService = new UserService();
-    private final AuthService authService = new AuthService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,7 +48,7 @@ public class AccountController extends HttpServlet {
         String answer;
         long securityQuestionId;
 
-        User userSession = null;
+        User userSession;
 
         switch (action) {
             case "register":
@@ -69,7 +67,7 @@ public class AccountController extends HttpServlet {
 
                 if (userService.create(usr, result) != null) {
                     request.getSession().setAttribute("success", "Account created successfully.");
-                    request.getRequestDispatcher(request.getContextPath().concat("/auth/sign-in")).forward(request, response);
+                    request.getRequestDispatcher("/auth/sign-in").forward(request, response);
                     break;
                 } else {
                     request.getSession().setAttribute("warning", result.get("warning"));
