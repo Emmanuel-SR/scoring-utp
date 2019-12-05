@@ -86,7 +86,7 @@
                         </div>
                         <div class="rating-group">
                             <label class="input-label">Calificación que obtuviste en la clase</label>
-                            <select name="student_score" class="grade">
+                            <select name="student_score" class="grade" required="">
                                 <option selected="" value="">--choose--</option>
                                 <option value="10.0">10</option>
                                 <option value="9.5">9.5</option>

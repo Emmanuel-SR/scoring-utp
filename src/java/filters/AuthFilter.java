@@ -22,7 +22,7 @@ public class AuthFilter implements Filter {
     private HttpServletResponse httpResponse = null;
 
     private static final Set<String> LOGIN_REQUIRED_URLS = new HashSet<>(Arrays.asList("/home/",
-            "/account/edit", "/student/", "/student/profile", "/professor","/professor/add", "/professor/save", "professor/findByText"));
+            "/account/edit", "/student", "/student/profile", "/professor","/professor/add", "/professor/save", "professor/findByText"));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

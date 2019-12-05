@@ -52,7 +52,7 @@ public class ScoringController extends HttpServlet {
                 boolean recommend = Boolean.parseBoolean(request.getParameter("recommend"));
                 String comment = request.getParameter("comment");
                 long professorId = Long.parseLong(request.getParameter("professor_id"));
-                String studentScore = request.getParameter("student_score");
+                double studentScore = Double.parseDouble(request.getParameter("student_score"));
 
                 Scoring scoring = new Scoring();
                 scoring.setClarity(clarity);

@@ -44,6 +44,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
 
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
 
         return usr;
@@ -62,6 +64,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
 
         } catch (SQLException e) {
             throw new IncorrectDaoOperation(e.getMessage());
+        }finally {
+            closeConnection();
         }
         return false;
     }
@@ -84,6 +88,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException e) {
             throw new IncorrectDaoOperation(e.getMessage());
+        }finally {
+            closeConnection();
         }
 
         return false;
@@ -112,6 +118,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             } else {
                 throw new IncorrectDaoOperation(e.getMessage());
             }
+        }finally {
+            closeConnection();
         }
         return false;
     }
@@ -135,6 +143,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return usr;
     }
@@ -157,6 +167,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return users;
     }
@@ -186,6 +198,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException e) {
             throw new IncorrectDaoOperation(e.getMessage());
+        }finally {
+            closeConnection();
         }
         return false;
     }
@@ -208,6 +222,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException ex) {
             throw new IncorrectDaoOperation(ex.getMessage());
+        }finally {
+            closeConnection();
         }
         return usr;
     }
@@ -222,6 +238,8 @@ public class userDao extends Dao implements ICrudDao<User, Long> {
             }
         } catch (SQLException e) {
             throw new IncorrectDaoOperation(e.getMessage());
+        }finally {
+            closeConnection();
         }
         return false;
     }

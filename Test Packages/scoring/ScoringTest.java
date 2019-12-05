@@ -31,7 +31,7 @@ public class ScoringTest {
         scoring.setComment("UNA CRACK EN SU CURSO.");
         scoring.setProfessorId(1);
         scoring.setUserId(2);
-        scoring.setStudentScore("10");
+        scoring.setStudentScore(10);
         Assert.notNull(SERVICE.create(scoring, errors), errors.get("error"));
     }
 }

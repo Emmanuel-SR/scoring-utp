@@ -8,7 +8,7 @@
     </head>
     <body class="banner banner-student">
         <main class="flex-container flex-col flex-center">
-            <form class="frm-register" action="<%=request.getContextPath()%>/account/register?profile=student" method="POST">
+            <form class="frm-register" action="<%=request.getContextPath()%>/account/register" method="POST">
                 <fieldset>
                     <legend>Account Information:</legend>
                     <div class="input-group">

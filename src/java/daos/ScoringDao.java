@@ -29,7 +29,7 @@ public class ScoringDao extends Dao {
             ps.setBoolean(5, scoring.isRecommed());
             ps.setBoolean(6, scoring.isAssistance());
             ps.setString(7, scoring.getComment());
-            ps.setString(8, scoring.getStudentScore());
+            ps.setDouble(8, scoring.getStudentScore());
             ps.setLong(9, scoring.getProfessorId());
             ps.setLong(10, scoring.getUserId());
 
@@ -42,6 +42,8 @@ public class ScoringDao extends Dao {
             } else {
                 throw new IncorrectDaoOperation(e.getMessage());
             }
+        }finally {
+            closeConnection();
         }
 
         return false;
